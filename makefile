@@ -8,7 +8,7 @@ INCLUDES = -I./include
 SOURCES = $(wildcard $(PREF_SRC)*.cpp)
 OBJ = $(patsubst $(PREF_SRC)%.cpp, $(PREF_OBJ)%.o, $(SOURCES))
 
-TARGET = list
+TARGET = tree
 
 $(TARGET): $(OBJ)
 	$(CC) $(OBJ) $(FLAGS) $(INCLUDES) -o $(TARGET)
