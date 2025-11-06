@@ -20,15 +20,15 @@ void WriteToDot(node_t* node, FILE* log_file)
 {
     fprintf(log_file, "digraph {\n");
 
-    fprintf(log_file, "HEAD [shape = record, label = \"Head\", style =  filled, fillcolor = \"green\"];\n");
-    fprintf(log_file, "TAIL [shape = record, label = \"Tail\", style =  filled, fillcolor = \"red\"];\n");
-    fprintf(log_file, "Free [shape = record, label = \"Free\", style =  filled, fillcolor = \"yellow\"];\n");
+    fprintf(log_file, "");
+    fprintf(log_file, "");
+    fprintf(log_file, "");
 
-    fprintf(log_file, "rankdir=LR;\n ranksep=0.5;\n nodesep = 0.3;");
+    fprintf(log_file, "");
 
     for (size_t index = 1; index < capacity; index++)
     {
-        fprintf(log_file, "node%lu [shape=record,label=\" %lu |element =  %f |{<f0> next = %lu  | prev  = %d}\", style=filled, fillcolor=lightblue, width=3, height=0.8];\n", index, index, node->data[index], node->next[index], node->prev[index]);
+        fprintf(log_file, "");
     }
 
     fprintf(log_file, "node1");
@@ -55,11 +55,13 @@ void CallCommand(size_t count_dump)
 
 void DumpToHtml(node_t* node, size_t count_dump, const char* file, int line)
 {
+    FILE* dump_file = fopen("dump.html", "w");
     char dump_str[120] = {};
     snprintf(dump_str, sizeof(dump_str), "<h1>DUMP FROM %s:%d\n", file, line);
-    fprintf(node->dump_file, "%s",dump_str);
+    fprintf(dump_file, "%s",dump_str);
+    
 
     char img_name[40] = {};
     snprintf(img_name, sizeof(img_name), "<img src = \"log/graph%lu.png\"/>\n",  count_dump);
-    fprintf(node->dump_file, "%s", img_name);
+    fprintf(dump_file, "%s", img_name);
 }
