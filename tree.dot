@@ -1,0 +1,11 @@
+digraph {
+  
+    node1 [shape=record, label = " adr |element =  хуй |{ next = adr_right  |  = adr_left}", style=filled, fillcolor=lightblue, width=3, height=0.8];
+    node2 [shape=record, label = " adr |element =  хуй |{ next = adr_right  |  = adr_left}", style=filled, fillcolor=lightblue, width=3, height=0.8];
+    node3 [shape=record, label = " adr |element =  хуй |{ next = adr_right  |  = adr_left}", style=filled, fillcolor=lightblue, width=3, height=0.8];
+    node4 [shape=record, label = " adr |element =  хуй |{ next = adr_right  |  = adr_left}", style=filled, fillcolor=lightblue, width=3, height=0.8];
+
+    edge [color=green, penwidth=1, arrowhead = normal];
+    root->node1->node2
+    node1->node3->node4
+}

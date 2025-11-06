@@ -1,15 +1,19 @@
 #include  <stdio.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "tree.h"
 
 void PrintNode(node_t* node)
 {
+    if (node == NULL) return;
+    
     printf("(");
     
     if(node->left)
     {
         PrintNode(node->left);
     }
+
     printf("%d", node->data);
 
     if(node->right)
@@ -19,36 +23,39 @@ void PrintNode(node_t* node)
     printf(")");
 }
 
-void InsertNode(node_t* node, int element)
+node_t* CreateNode(int data)
 {
-    
+    node_t* new_node = (node_t*)calloc(1, sizeof(node_t));
 
-    if(element <= node->data)
+    new_node->data = data;
+    return new_node;
+}
+
+void InsertNode(node_t* root, int element)
+{
+    if(element <= root->data)
     {
-        if(node->left == NULL)
+        if(root->left == NULL)
         {
-            node_t inserted_node =
-            {
-                node->data = element
-            };
-            node->left = &inserted_node;
+            root->left = CreateNode(element);
+            assert(root->left != NULL);
         }
-        assert(node->left != NULL);
-        InsertNode(node->left, element);
+        else
+        {
+            InsertNode(root->left, element);
+            }
     }
-
-    if(element > node->data)
+    else // element > root->data
     {
-        if(node->right == NULL)
+        if(root->right == NULL)
         {
-            node_t inserted_node =
-            {
-                
-                node->data = element
-            };
-            node->right = &inserted_node;
+            root->right = CreateNode(element);
+            assert(root->right != NULL);
         }
-        InsertNode(node->right, element);
+        else
+        {
+            InsertNode(root->right, element);
+        }
     }
 }
 
@@ -62,8 +69,7 @@ void DeleteNode(node_t* node)
 
     if (node->right)
     {
-        DeleteNode(node->left);
+        DeleteNode(node->right);
     }
-
-    node = NULL;
+    free(node);
 }

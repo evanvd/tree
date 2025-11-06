@@ -41,6 +41,6 @@ int main()
     PrintNode(&root);
 
     InsertNode(&root, 6);
-    
+    getchar();
     PrintNode(&root);
 }
