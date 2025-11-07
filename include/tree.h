@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+#ifndef TREE_H
+#define TREE_H
+
 
 struct node_t 
 {
@@ -12,3 +15,4 @@ void PrintNode(node_t* node);
 void InsertNode(node_t* node, int element);
 node_t* CreateNode(int data);
 void DeleteNode(node_t* node);
+#endif

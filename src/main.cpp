@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include "tree.h"
+#include "dump.h"
+
+
 
 int main()
 {
@@ -9,6 +12,8 @@ int main()
         .right = NULL,
         .left =  NULL 
     };
+
+
 
     node_t node3 =
     {
@@ -40,7 +45,7 @@ int main()
 
     PrintNode(&root);
 
-    InsertNode(&root, 6);
-    getchar();
+    //(&root, 6);
+    __Dump__(&root, "log/graphviz_file.dot");
     PrintNode(&root);
 }

@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "tree.h"
 
+
+
 void PrintNode(node_t* node)
 {
     if (node == NULL) return;
@@ -43,9 +45,9 @@ void InsertNode(node_t* root, int element)
         else
         {
             InsertNode(root->left, element);
-            }
+        }
     }
-    else // element > root->data
+    else
     {
         if(root->right == NULL)
         {
