@@ -63,6 +63,7 @@ void InsertNode(node_t* root, int element)
 
 void DeleteNode(node_t* node)
 {
+    if(node == NULL) return;
     
     if(node->left)
     {

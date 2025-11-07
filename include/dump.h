@@ -2,7 +2,7 @@
 #include "tree.h"
 
 
-#define __Dump__(node_t, filename) GraphDump(node_t, filename, __FILE__, __LINE__);
+#define __Dump__(node_t, filename) NodePrint(node_t, __FILE__, __LINE__); GraphDump(node_t, filename, __FILE__, __LINE__);
 
 const size_t capacity = 10;
 

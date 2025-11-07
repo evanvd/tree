@@ -3,6 +3,12 @@
 #include <string.h>
 #include "dump.h"
 
+void NodePrint(node_t* node, const char* file, int line)
+{
+    printf("\n====DUMP from %s:%d====\n", file, line);
+    PrintNode(node);
+    printf("\n=================================\n\n");
+}
 
 void GraphDump(node_t* node, const char* filename, const char* file, int line)
 {
@@ -35,18 +41,17 @@ static size_t node_count = 1;
 
 void PrintNodeToDot(node_t* node, FILE* log_file)
 {
-    fprintf(log_file, "node%lu [label=\"{ adr %p | element %d | {<L> %p| <R> %p}}\"];\n", node_count, node, node->data, node->left, node->right);
+    size_t current_node_id = node_count++;
+    fprintf(log_file, "node%lu [label=\"{ adr %p | element %d | {<L> %p| <R> %p}}\"];\n", current_node_id, node, node->data, node->left, node->right);
     if(node->left)
     {
-        fprintf(log_file, "node%lu:<L>->node%lu\n", node_count, node_count + 1);
-        node_count++;
+        fprintf(log_file, "node%lu:<L>->node%lu\n", current_node_id, node_count);
         PrintNodeToDot(node->left, log_file);
     }
 
     if(node->right)
     {
-        fprintf(log_file, "node%lu:<R>->node%lu\n", node_count, node_count + 1);
-        node_count++;
+        fprintf(log_file, "node%lu:<R>->node%lu\n", current_node_id, node_count);
         PrintNodeToDot(node->right, log_file);
     }
 }
