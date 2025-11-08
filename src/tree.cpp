@@ -3,7 +3,11 @@
 #include <stdlib.h>
 #include "tree.h"
 
-
+void InitTree(tree_t* tree, int root_element)
+{
+    tree->dump_file = fopen("dump.html", "w"); //FIXME HARDCODE yeee
+    tree->root  = CreateNode(root_element); 
+}
 
 void PrintNode(node_t* node)
 {
@@ -40,24 +44,24 @@ void InsertNode(node_t* root, int element)
         if(root->left == NULL)
         {
             root->left = CreateNode(element);
-            assert(root->left != NULL);
+            assert(root->left != NULL); // TODO use if here
         }
         else
         {
             InsertNode(root->left, element);
         }
+
+        return;
+    }
+
+    if(root->right == NULL)
+    {
+        root->right = CreateNode(element);
+        assert(root->right != NULL);
     }
     else
     {
-        if(root->right == NULL)
-        {
-            root->right = CreateNode(element);
-            assert(root->right != NULL);
-        }
-        else
-        {
-            InsertNode(root->right, element);
-        }
+        InsertNode(root->right, element);
     }
 }
 

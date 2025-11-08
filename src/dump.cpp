@@ -10,16 +10,16 @@ void NodePrint(node_t* node, const char* file, int line)
     printf("\n=================================\n\n");
 }
 
-void GraphDump(node_t* node, const char* filename, const char* file, int line)
+void GraphDump(tree_t* tree, const char* filename, const char* file, int line)
 {
     static size_t count_dump = 1;    
     
     FILE* log_file =  fopen(filename, "w");
-    WriteToDot(node, log_file);
+    WriteToDot(tree->root, log_file);
     fclose(log_file);
     
     CallCommand(count_dump);
-    DumpToHtml(node, count_dump, file, line);
+    DumpToHtml(tree, count_dump, file, line);
     count_dump++;
 }
 
@@ -66,15 +66,14 @@ void CallCommand(size_t count_dump)
 }
 
 
-void DumpToHtml(node_t* node, size_t count_dump, const char* file, int line)
+void DumpToHtml(tree_t* tree, size_t count_dump, const char* file, int line)
 {
-    FILE* dump_file = fopen("dump.html", "w");
     char dump_str[120] = {};
-    snprintf(dump_str, sizeof(dump_str), "<h1>DUMP FROM %s:%d\n", file, line);
-    fprintf(dump_file, "%s",dump_str);
+    snprintf(dump_str, sizeof(dump_str), "<h1>DUMP FROM %s:%d</h1>\n", file, line);
+    fprintf(tree->dump_file, "%s",dump_str);
     
 
     char img_name[40] = {};
     snprintf(img_name, sizeof(img_name), "<img src = \"log/tree%lu.png\"/>\n",  count_dump);
-    fprintf(dump_file, "%s", img_name);
+    fprintf(tree->dump_file, "%s", img_name);
 }

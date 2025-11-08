@@ -7,21 +7,36 @@
 
 int main()
 {
-    node_t* root = CreateNode(10);
-    
+    tree_t tree = {};
+    InitTree(&tree, 10);    
     node_t* node1 = CreateNode(5);
     node_t* node2 = CreateNode(3);
     node_t* node3 = CreateNode(7);
     node_t* node4 = CreateNode(20);
     
-    root->left = node1;
-    root->right = node4;
+    tree.root->left = node1;
+    tree.root->right = node4;
     
     node1->left = node2;
     node1->right = node3;
 
-    InsertNode(root, 6);
-    __Dump__(root, "log/graphviz_file.dot");
+    DUMP_TREE(tree, "log/graphviz_file.dot");
+
+    InsertNode(tree.root, 6);
+
+    DUMP_TREE(tree, "log/graphviz_file.dot");
+    // DeleteNode(node3);
+    InsertNode(tree.root, 8);
+    DUMP_TREE(tree, "log/graphviz_file.dot");
+
+    InsertNode(tree.root, 18);
+    DUMP_TREE(tree, "log/graphviz_file.dot");
     
-    DeleteNode(root);
+    InsertNode(tree.root, 21);
+    DUMP_TREE(tree, "log/graphviz_file.dot");
+    
+    InsertNode(tree.root, 17);
+    InsertNode(tree.root, 19);
+    DUMP_TREE(tree, "log/graphviz_file.dot");
+    DeleteNode(tree.root);
 }
